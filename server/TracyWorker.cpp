@@ -2741,6 +2741,9 @@ void Worker::Exec()
 
     std::chrono::time_point<std::chrono::high_resolution_clock> t0;
 
+    static constexpr char FTLHeader[] = { 'B', 'S', 'D', '_', 8, 0, 'P', 'R', 'O', 'F', 'I', 'L', 'E', 'R' };
+
+    m_sock.Send( FTLHeader, sizeof( FTLHeader ) );
     m_sock.Send( HandshakeShibboleth, HandshakeShibbolethSize );
     uint32_t protocolVersion = ProtocolVersion;
     m_sock.Send( &protocolVersion, sizeof( protocolVersion ) );
